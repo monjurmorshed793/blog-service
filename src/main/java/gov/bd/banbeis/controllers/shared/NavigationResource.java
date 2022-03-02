@@ -1,4 +1,4 @@
-package gov.bd.banbeis.controllers;
+package gov.bd.banbeis.controllers.shared;
 
 import gov.bd.banbeis.models.Navigation;
 import io.smallrye.mutiny.Uni;
@@ -8,7 +8,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("/navigation")
+@Path("/api/shared/navigation")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class NavigationResource {
@@ -19,19 +19,6 @@ public class NavigationResource {
         return Navigation.findById(new ObjectId(id));
     }
 
-    @POST
-    @Path("/save")
-    public Uni<Navigation> save(Navigation navigation) throws Exception{
-        return navigation.persist();
-    }
-
-    @PUT
-    @Path("/update")
-    public Uni<Navigation> upda(Navigation navigation) throws Exception{
-        if(navigation.id==null)
-            throw new Exception("ID should not be null.");
-        return navigation.update();
-    }
 
     @GET
     @Path("/all")
