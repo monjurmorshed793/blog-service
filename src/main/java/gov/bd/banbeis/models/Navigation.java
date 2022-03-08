@@ -10,19 +10,22 @@ import java.util.List;
 
 @MongoEntity(collection = "Navigation")
 public class Navigation extends ReactivePanacheMongoEntity {
+    public Integer sequence;
     public String route;
     public String label;
     public String icon;
+    public String roles;
     public List<Navigation> child = new ArrayList<>();
 
     @Override
     public String toString() {
         return "Navigation{" +
-                "route='" + route + '\'' +
+                "sequence=" + sequence +
+                ", route='" + route + '\'' +
                 ", label='" + label + '\'' +
                 ", icon='" + icon + '\'' +
+                ", roles='" + roles + '\'' +
                 ", child=" + child +
-                ", id=" + id +
                 '}';
     }
 }
