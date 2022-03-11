@@ -1,7 +1,9 @@
 package gov.bd.banbeis.controllers.secured;
 
 import gov.bd.banbeis.models.Navigation;
+import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Uni;
+import org.bson.types.ObjectId;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -26,8 +28,10 @@ public class MutableNavigationResource extends Navigation {
 
     @DELETE
     @Path("/delete/{id}")
+    @Blocking
     public Uni<Boolean> delete(@PathParam("id") String id) throws Exception{
-        return Navigation.deleteById(id);
+        return Navigation.deleteById(new ObjectId(id))
+                .invoke(i-> System.out.println(i));
     }
 
 }
