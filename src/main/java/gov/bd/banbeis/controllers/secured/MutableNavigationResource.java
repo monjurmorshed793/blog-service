@@ -21,8 +21,6 @@ public class MutableNavigationResource extends Navigation {
     @PUT
     @Path("/update")
     public Uni<Navigation> update(Navigation navigation) throws Exception{
-        if(navigation.id==null)
-            throw new Exception("ID should not be null.");
         return navigation.update();
     }
 
