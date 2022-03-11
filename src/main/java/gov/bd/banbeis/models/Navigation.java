@@ -15,7 +15,7 @@ public class Navigation extends ReactivePanacheMongoEntity {
     public String label;
     public String icon;
     public String roles;
-    public List<Navigation> subMenus = new ArrayList<>();
+    public List<Navigation> submenus = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -25,7 +25,7 @@ public class Navigation extends ReactivePanacheMongoEntity {
                 ", label='" + label + '\'' +
                 ", icon='" + icon + '\'' +
                 ", roles='" + roles + '\'' +
-                ", child=" + subMenus +
+                ", submenus=" + submenus.toString() +
                 '}';
     }
 }

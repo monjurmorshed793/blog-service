@@ -18,10 +18,16 @@ public class MutableNavigationResource extends Navigation {
 
     @PUT
     @Path("/update")
-    public Uni<Navigation> upda(Navigation navigation) throws Exception{
+    public Uni<Navigation> update(Navigation navigation) throws Exception{
         if(navigation.id==null)
             throw new Exception("ID should not be null.");
         return navigation.update();
+    }
+
+    @DELETE
+    @Path("/delete/{id}")
+    public Uni<Boolean> delete(@PathParam("id") String id) throws Exception{
+        return Navigation.deleteById(id);
     }
 
 }
