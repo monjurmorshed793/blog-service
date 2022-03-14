@@ -26,10 +26,8 @@ public class MutableNavigationResource extends Navigation {
 
     @DELETE
     @Path("/delete/{id}")
-    @Blocking
     public Uni<Boolean> delete(@PathParam("id") String id) throws Exception{
-        return Navigation.deleteById(new ObjectId(id))
-                .invoke(i-> System.out.println(i));
+        return Navigation.deleteById(new ObjectId(id));
     }
 
 }
