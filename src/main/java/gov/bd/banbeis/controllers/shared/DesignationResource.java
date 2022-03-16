@@ -19,6 +19,7 @@ public class DesignationResource {
     }
 
     @GET
+    @Path("/all")
     public Uni<List<Designation>> getAll(){
         return Designation.listAll();
     }

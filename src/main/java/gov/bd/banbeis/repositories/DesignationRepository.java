@@ -8,4 +8,5 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class DesignationRepository implements PanacheMongoRepository<Designation> {
 
+
 }
