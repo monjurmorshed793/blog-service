@@ -7,6 +7,7 @@ import org.bson.types.ObjectId;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/api/secured/designation")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -20,8 +21,8 @@ public class MutableDesignationResource extends DesignationResource {
 
     @DELETE
     @Path("/{id}")
-    public Uni<Boolean> delete(@PathParam("id") String id){
-        return Designation.deleteById(new ObjectId(id));
+    public void delete(@PathParam("id") String id){
+        Designation.deleteById(new ObjectId(id));
     }
 
 }

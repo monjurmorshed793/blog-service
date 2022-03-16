@@ -121,61 +121,14 @@ public class DesignationResourceTest {
                         "bn.shortName", is(responsedDesignation1.bn.shortName)
                 );
 
-    }
-
-    @Test
-    public void testSaveWhenIdIsNull() throws JsonProcessingException {
-        Designation designation = new Designation();
-        designation.name= "Assistant Programmer";
-        designation.shortName= "AP";
-        designation.grade = 9;
-
-        Designation bnDesignation = new Designation();
-        bnDesignation.name = "সহকারী প্রোগ্রামার";
-        bnDesignation.shortName = "এপি";
-        designation.bn   = bnDesignation;
-
-        ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        String postBody = objectWriter.writeValueAsString(designation);
-
-        given()
-                .body(postBody)
-                .contentType("application/json")
-                .when().put("/api/secured/designation")
+        RestAssured
+                .given()
+                .contentType(ContentType.JSON)
+                .delete(securedAPI+"/"+responsedDesignation1.id.toString())
                 .then()
-                .statusCode(200)
-                .body("id", notNullValue(),
-                "name", is("Assistant Programmer"),
-                        "shortName", is("AP"),
-                        "grade", is(9),
-                        "bn.name", is("সহকারী প্রোগ্রামার"),
-                        "bn.shortName", is("এপি")
-                );
+                .statusCode(204);
     }
 
-    @Test
-    public void testGetById(){
-        PanacheMock.mock(Designation.class);
-        Designation designation = new Designation();
-        designation.id = new ObjectId("6230ae52979e3226dea189d9");
-        designation.name= "Assistant Programmer";
-        designation.shortName= "AP";
-        designation.grade = 9;
-
-        Designation bnDesignation = new Designation();
-        bnDesignation.name = "সহকারী প্রোগ্রামার";
-        bnDesignation.shortName = "এপি";
-        designation.bn   = bnDesignation;
-
-        Mockito.when(Designation.findById(new ObjectId("1"))).thenReturn(Uni.createFrom().item(designation));
-
-
-        given()
-                .when().get("/api/shared/designation/1")
-                .then()
-                .statusCode(200)
-                .body("id", is("1"));
-    }
 
     private Designation[] postDesignation(Designation designation){
         return RestAssured
