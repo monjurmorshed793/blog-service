@@ -1,6 +1,7 @@
 package gov.bd.banbeis.controllers.shared;
 
 import gov.bd.banbeis.models.Navigation;
+import io.quarkus.panache.common.Sort;
 import io.smallrye.mutiny.Uni;
 import org.bson.types.ObjectId;
 
@@ -23,6 +24,6 @@ public class NavigationResource {
     @GET
     @Path("/all")
     public Uni<List<Navigation>> getAll(){
-        return Navigation.listAll();
+        return Navigation.listAll(Sort.by("sequence"));
     }
 }

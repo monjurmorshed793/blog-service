@@ -14,7 +14,9 @@ import javax.ws.rs.core.MediaType;
 public class MutableNavigationResource extends Navigation {
     @POST
     @Path("/save")
+    @Blocking
     public Uni<Navigation> save(Navigation navigation) throws Exception{
+        navigation.sequence = Integer.parseInt((Navigation.count().await().indefinitely()+1)+"");
         return navigation.persist();
     }
 
