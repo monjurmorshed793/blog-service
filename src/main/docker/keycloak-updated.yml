@@ -8,17 +8,17 @@ services:
   mysql:
     image: mysql:8.0.27
     volumes:
-      - mysql_data:/var/lib/mysql
+      - C:/Users/monju/Documents/docker-storage/mysql_updated:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: keycloak
       MYSQL_USER: keycloak
       MYSQL_PASSWORD: password
   keycloak:
-    image: jboss/keycloak:15.0.2
+    image: quay.io/keycloak/keycloak:legacy
     volumes:
       - type: bind
-        source: ./custom-theme
+        source: ./keycloak
         target: /opt/jboss/keycloak/themes/banbeis
     environment:
       DB_VENDOR: MYSQL
