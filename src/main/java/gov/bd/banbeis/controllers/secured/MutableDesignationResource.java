@@ -21,8 +21,8 @@ public class MutableDesignationResource extends DesignationResource {
 
     @DELETE
     @Path("/{id}")
-    public void delete(@PathParam("id") String id){
-        Designation.deleteById(new ObjectId(id));
+    public Uni<Boolean> delete(@PathParam("id") String id){
+      return  Designation.deleteById(new ObjectId(id));
     }
 
 }
