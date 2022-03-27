@@ -14,7 +14,9 @@ import javax.ws.rs.core.MediaType;
 public class MutableNavigationResource extends Navigation {
     @POST
     @Path("/save")
+    @Blocking
     public Uni<Navigation> save(Navigation navigation) throws Exception{
+        navigation.sequence = Integer.parseInt((Navigation.count().await().indefinitely()+1)+"");
         return navigation.persist();
     }
 
@@ -26,10 +28,8 @@ public class MutableNavigationResource extends Navigation {
 
     @DELETE
     @Path("/delete/{id}")
-    @Blocking
     public Uni<Boolean> delete(@PathParam("id") String id) throws Exception{
-        return Navigation.deleteById(new ObjectId(id))
-                .invoke(i-> System.out.println(i));
+        return Navigation.deleteById(new ObjectId(id));
     }
 
 }
