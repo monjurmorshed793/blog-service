@@ -11,7 +11,7 @@ import java.util.List;
 @GraphQLApi
 public class DesignationGResource {
 
-    @Query("allDesignations")
+    @Query("designations")
     @Description("Get all designations")
     public Uni<List<Designation>> getAllDesignations(){
         return Designation.listAll();
