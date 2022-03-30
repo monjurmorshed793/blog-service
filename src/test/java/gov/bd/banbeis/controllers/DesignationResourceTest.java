@@ -1,3 +1,4 @@
+/*
 package gov.bd.banbeis.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -141,3 +142,4 @@ public class DesignationResourceTest {
                 .extract().body().as(Designation[].class);
     }
 }
+*/
