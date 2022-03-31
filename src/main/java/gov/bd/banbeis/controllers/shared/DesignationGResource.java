@@ -60,7 +60,7 @@ public class DesignationGResource {
     }
 
     @Mutation
-    public Uni<Boolean> deleteDesignation(String id){
-        return Designation.deleteById(new ObjectId(id));
+    public Uni<Boolean> deleteDesignation(String designationId){
+        return Designation.deleteById(new ObjectId(designationId));
     }
 }
