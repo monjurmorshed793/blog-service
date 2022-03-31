@@ -7,6 +7,10 @@ import io.smallrye.graphql.api.AdaptToScalar;
 import io.smallrye.graphql.api.Scalar;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.types.ObjectId;
+import org.eclipse.microprofile.graphql.DefaultValue;
+import org.eclipse.microprofile.graphql.Ignore;
+import org.eclipse.microprofile.graphql.Input;
+import org.eclipse.microprofile.graphql.Type;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
