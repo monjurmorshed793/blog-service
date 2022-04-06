@@ -36,12 +36,6 @@ public class DesignationGResource {
         return designation.persist();
     }
 
-/*
-    @Mutation("saveDesignation")
-    public Uni<Designation> saveDesignation(@Source Designation designation){
-        return designation.persist();
-    }
-*/
 
     @Mutation
     public Uni<Designation> updateDesignation(String id, String name, String shortName, Integer grade, String bnName, String bnShortName){

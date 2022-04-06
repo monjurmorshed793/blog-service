@@ -29,14 +29,4 @@ public class Designation extends ReactivePanacheMongoEntityBase {
     public Integer grade;
     @NotNull(message = "Must provide Bangla section")
     public Designation bn;
-
-    @Override
-    public String toString() {
-        return "Designation{" +
-                "name='" + name + '\'' +
-                ", shortName='" + shortName + '\'' +
-                ", grade=" + grade +
-                ", bn=" + bn +
-                '}';
-    }
 }
