@@ -1,8 +1,9 @@
 package gov.bd.banbeis.changesets;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import gov.bd.banbeis.models.District;
 import gov.bd.banbeis.models.Division;
-import io.smallrye.mutiny.Uni;
+import gov.bd.banbeis.models.LanguageType;
+import io.smallrye.common.annotation.Blocking;
 import liquibase.change.custom.CustomTaskChange;
 import liquibase.database.Database;
 import liquibase.exception.CustomChangeException;
@@ -16,34 +17,46 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class DivisionJsonChangeset implements CustomTaskChange {
+public class DistrictChangeset implements CustomTaskChange {
 
+    // to hold the parameter value (csv file location)
     private String file;
+
     private ResourceAccessor resourceAccessor;
 
-    public String getFile() {
+    public String getFile(){
         return file;
     }
 
-    public void setFile(String file) {
+    public void setFile(String file){
         this.file = file;
     }
 
     @Override
+    @Blocking
     public void execute(Database database) throws CustomChangeException {
         try{
             BufferedReader in = new BufferedReader(
-                    new InputStreamReader(resourceAccessor.openStream(null, file))
+                    new InputStreamReader(resourceAccessor.openStream(null, file), "UTF-8")
             );
             //ignore header
-            String str = null;
-            List<Division> divisions = new ArrayList<>();
+            String str = in.readLine();
+            List<District> districts = new ArrayList<>();
             while ((str = in.readLine()) != null && !str.trim().equals("")) {
-                ObjectMapper objectMapper = new ObjectMapper();
-                Division division = objectMapper.readValue(str, Division.class);
-                divisions.add(division);
+                str = str.replaceAll("\"","");
+                List<String> objects = new ArrayList<String>(Arrays.asList(str.split(",")));
+                District district = new District();
+                district.districtId = Integer.parseInt(objects.get(0));
+                district.divisionId = Integer.parseInt(objects.get(1));
+                district.name = new LanguageType();
+                district.name.english =  objects.get(2);
+                district.name.bangla = objects.get(3);
+                district.lat = objects.get(4);
+                district.lon = objects.get(5);
+                district.url = objects.get(6);
+                districts.add(district);
             }
-            Division.persist(divisions).subscribe().asCompletionStage();
+            District.persist(districts).subscribeAsCompletionStage();
 
         }catch (Exception e){
             throw new CustomChangeException(e);

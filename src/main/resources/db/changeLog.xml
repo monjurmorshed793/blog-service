@@ -6,9 +6,19 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <changeSet id="0000020" author="Monjur-E-Morshed">
+    <changeSet id="000000001" author="Monjur-E-Morshed">
         <customChange class="gov.bd.banbeis.changesets.DivisionChangeset">
             <param name="file" value="db/initial-data/DIVISIONS.csv"></param>
+        </customChange>
+    </changeSet>
+    <changeSet id="000000002" author="Monjur-E-Morshed">
+        <customChange class="gov.bd.banbeis.changesets.DistrictChangeset">
+            <param name="file" value="db/initial-data/DISTRICTS.csv"></param>
+        </customChange>
+    </changeSet>
+    <changeSet id="000000003" author="Monjur-E-Morshed">
+        <customChange class="gov.bd.banbeis.changesets.UpazilaChangeset">
+            <param name="file" value="db/initial-data/UPAZILAS.csv"></param>
         </customChange>
     </changeSet>
 

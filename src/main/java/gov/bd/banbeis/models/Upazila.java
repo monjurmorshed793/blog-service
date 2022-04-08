@@ -4,10 +4,11 @@ import io.quarkus.mongodb.panache.common.MongoEntity;
 import io.quarkus.mongodb.panache.reactive.ReactivePanacheMongoEntityBase;
 import org.bson.codecs.pojo.annotations.BsonId;
 
-@MongoEntity(collection = "Division")
-public class Division extends ReactivePanacheMongoEntityBase {
+@MongoEntity(collection = "Upazila")
+public class Upazila extends ReactivePanacheMongoEntityBase {
     @BsonId
-    public Integer divisionId;
+    public Integer upazilaId;
+    public Integer districtId;
     public LanguageType name;
     public String url;
 }

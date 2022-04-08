@@ -27,8 +27,8 @@ public class DivisionGResource {
     @Description("Create a new division")
     public Uni<Division> createDivision(String name, String bnName, String url){
         Division division = new Division();
-        division.name = name;
-        division.bnName = bnName;
+        division.name.english = name;
+        division.name.bangla = bnName;
         division.url = url;
         return division.persist();
     }
@@ -40,8 +40,8 @@ public class DivisionGResource {
         return division
                 .onItem()
                 .transformToUni(d-> {
-                    d.name = name;
-                    d.bnName = bnName;
+                    d.name.english = name;
+                    d.name.bangla = bnName;
                     d.url = url;
                     return d.update();
                 });
