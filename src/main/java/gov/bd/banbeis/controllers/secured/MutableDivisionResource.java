@@ -19,6 +19,6 @@ public class MutableDivisionResource extends DivisionResource {
     @DELETE
     @Path("/{id}")
     public Uni<Boolean> delete(@PathParam("id") String id){
-        return Division.deleteById(id);
+        return Division.deleteById(Integer.parseInt(id));
     }
 }

@@ -15,7 +15,7 @@ public class DivisionResource {
     @GET
     @Path("/{id}")
     public Uni<Division> get(@PathParam("id") String id){
-        return Division.findById(id);
+        return Division.findById(Integer.parseInt(id));
     }
 
     @GET
