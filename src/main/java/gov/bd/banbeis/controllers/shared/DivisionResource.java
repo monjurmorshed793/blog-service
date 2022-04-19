@@ -40,10 +40,10 @@ public class DivisionResource {
     @GET
     @Path("/report")
     @Produces(MediaType.MULTIPART_FORM_DATA)
-    public DownloadFormData generateReport() throws IOException {
+    public DownloadFormData generateReport() throws Exception {
         DownloadFormData downloadFormData = new DownloadFormData();
         downloadFormData.name="Division Report";
-        ByteArrayOutputStream buffer = divisionReportService.generateAllDivisionReport();
+        ByteArrayOutputStream buffer = divisionReportService.generatePdfBoxReport();
         byte[] bytes = buffer.toByteArray();
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
         downloadFormData.file = byteArrayInputStream;

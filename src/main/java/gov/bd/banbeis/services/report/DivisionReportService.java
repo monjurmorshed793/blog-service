@@ -24,6 +24,17 @@ import com.itextpdf.layout.properties.UnitValue;
 import gov.bd.banbeis.models.Division;
 import io.smallrye.common.annotation.Blocking;
 import io.smallrye.mutiny.Uni;
+import org.apache.pdfbox.cos.COSName;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDTrueTypeFont;
+import org.apache.pdfbox.pdmodel.font.PDType0Font;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.encoding.Encoding;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -37,6 +48,34 @@ import static com.itextpdf.kernel.pdf.PdfName.*;
 
 @ApplicationScoped
 public class DivisionReportService {
+
+    public ByteArrayOutputStream generatePdfBoxReport() throws Exception{
+
+        PDDocument document = new PDDocument();
+        PDPage firstPage = new PDPage(PDRectangle.A4);
+        document.addPage(firstPage);
+        InputStream inputStream = getClass().getResourceAsStream("/fonts/nikosh.ttf");
+        var font1 = PDType0Font.load(document, inputStream, false);
+
+        PDPageContentStream content = new PDPageContentStream(document, firstPage);
+        content.beginText();
+
+        content.setFont(font1, 14);
+        content.newLineAtOffset(30, 750);
+//        content.showText("Hello world");
+        Uni<List<Division>> divisionsUni = Division.listAll();
+        List<Division> divisions = divisionsUni.await().indefinitely();
+        for(Division division: divisions){
+            content.showText(division.name.bangla+" ");
+        }
+//        content.showText("মঞ্জুর-ই-মোর্শেদ");
+        content.endText();
+        content.close();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        document.save(out);
+        document.close();
+        return out;
+    }
 
 
     @Blocking
