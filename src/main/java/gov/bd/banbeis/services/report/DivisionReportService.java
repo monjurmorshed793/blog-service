@@ -57,6 +57,10 @@ public class DivisionReportService {
         InputStream inputStream = getClass().getResourceAsStream("/fonts/nikosh.ttf");
         var font1 = PDType0Font.load(document, inputStream, false);
 
+        var kalpurushStream = getClass().getResourceAsStream("/fonts/lohit.ttf");
+        var kalpurushFont = PDType0Font.load(document, kalpurushStream, false);
+
+
         PDPageContentStream content = new PDPageContentStream(document, firstPage);
         content.beginText();
 
@@ -68,7 +72,7 @@ public class DivisionReportService {
         for(Division division: divisions){
             content.showText(division.name.bangla+" ");
         }
-//        content.showText("মঞ্জুর-ই-মোর্শেদ");
+        content.showText("মঞ্জুর-ই-মোর্শেদ");
         content.endText();
         content.close();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
