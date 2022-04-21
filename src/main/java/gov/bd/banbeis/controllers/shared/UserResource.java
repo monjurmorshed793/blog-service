@@ -24,15 +24,12 @@ public class UserResource {
     @GET
     @Path("/total-user")
     public Uni<Integer> getTotalUsers(){
-       // return keycloakUserAPI.getTotalCount();
         return Uni.createFrom().item(realmResource.users().count());
     }
 
     @GET
     @Path("/all")
     public Uni<List<UserRepresentation>> getUsers(){
-        realmResource.users();
-        realmResource.users().userProfile();
         return Uni.createFrom().item(realmResource.users().list());
     }
 }

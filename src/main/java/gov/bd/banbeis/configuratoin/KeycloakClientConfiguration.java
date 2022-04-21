@@ -1,4 +1,4 @@
-package gov.bd.banbeis.services.keycloak;
+package gov.bd.banbeis.configuratoin;
 
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
@@ -10,7 +10,7 @@ import org.keycloak.admin.client.resource.RealmResource;
 
 import javax.enterprise.context.ApplicationScoped;
 
-public class KeycloakClientService {
+public class KeycloakClientConfiguration {
 
     @ConfigProperty(name="keycloak-server-url")
     String authServer;
